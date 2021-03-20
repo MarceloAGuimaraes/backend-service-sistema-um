@@ -6,7 +6,7 @@ module Api
 
       def create
         @request = Request.create(user_id: @user.id)
-        @request.addresses.find_or_create_by(address_params)
+        handle_address
         handle_questions
         render json: { request: @request }, status: 200
       end
@@ -18,8 +18,17 @@ module Api
 
       private
 
+      def handle_address
+        if @request.address.present?
+          @request.address.update(address_params)
+        else
+          @request.create_address(address_params)
+        end
+      end
+
       def enqueue_request
-        puts "oi" + @request.user.name
+        sistema_dois = SistemaDoisService.new
+        sistema_dois.call(@request.id, @request.address.to_param)
       end
 
       def handle_questions
