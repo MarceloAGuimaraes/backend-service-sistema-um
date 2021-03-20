@@ -27,11 +27,6 @@ module Api
         end
       end
 
-      def enqueue_request
-        # sistema_dois = SistemaDoisService.new
-        # SistemaDoisServiceWorker.perform_async(@request.id, "oi")
-      end
-
       def handle_questions
         request_params.each do |_k, text|
           Question.create!(
