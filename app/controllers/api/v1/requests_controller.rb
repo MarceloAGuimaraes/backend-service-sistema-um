@@ -8,6 +8,7 @@ module Api
         @request = Request.create(user_id: @user.id)
         handle_address
         handle_questions
+        SistemaDoisServiceWorker.perform_async(@request.id, @request.address.to_param)
         render json: { request: @request }, status: 200
       end
 
@@ -27,8 +28,8 @@ module Api
       end
 
       def enqueue_request
-        sistema_dois = SistemaDoisService.new
-        sistema_dois.call(@request.id, @request.address.to_param)
+        # sistema_dois = SistemaDoisService.new
+        # SistemaDoisServiceWorker.perform_async(@request.id, "oi")
       end
 
       def handle_questions

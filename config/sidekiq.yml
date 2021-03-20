@@ -1,0 +1,12 @@
+:concurrency: 2
+:daemon: false
+:timeout: 30
+:queues:
+  - default
+
+development:
+  :concurrency: 5
+stag:
+  :concurrency: 10
+  :pidfile: ./tmp/pids/sidekiq.pid
+  :logfile: ./log/sidekiq.log
