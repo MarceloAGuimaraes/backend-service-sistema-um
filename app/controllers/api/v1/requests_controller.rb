@@ -2,7 +2,6 @@ module Api
   module V1
     class RequestsController < ApplicationController
       before_action :validate_user, only: [:create]
-      after_action :enqueue_request, only: [:create]
 
       def create
         @request = Request.create(user_id: @user.id)
