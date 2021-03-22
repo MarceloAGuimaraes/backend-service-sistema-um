@@ -10,6 +10,8 @@ services:
       - redis
     ports:
       - "3000:3000"
+    expose:
+      - "3000"
     volumes:
       - .:/app
       - gem_cache:/usr/local/bundle/gems
