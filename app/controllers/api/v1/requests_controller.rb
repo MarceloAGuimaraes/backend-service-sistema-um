@@ -14,6 +14,7 @@ module Api
       def update_address
         @request = Request.find(params[:id])
         @request.address.update(lat: params[:lat], long: params[:long])
+        render json: { message: 'Endereço atualizado'}, status: 200
       end
 
       private
